@@ -1,0 +1,30 @@
+<app-search-books-form
+  (searchBookshelf)="setFilters($event)"
+></app-search-books-form>
+
+<app-add-book-form
+  (addBookToShelf)="addBookToShelf($event)"
+></app-add-book-form>
+
+<div class="library">
+    @if (!hasFilters()) {
+        <h2>Books:</h2>
+    }
+    @if (hasFilters()) {
+        <h2>Search Results:</h2>
+        <button (click)="clearFilters()">Clear Filters</button>
+    }
+    
+    
+  
+    <ul>
+        @for (book of books; track $index) {
+            <app-book
+            [book]="book"
+            (toggleLentOut)="updateLentOut($event)"
+            (removeBookFromShelf)="removeBookFromShelf($event)"
+          ></app-book>
+        }
+      
+    </ul>
+  </div>

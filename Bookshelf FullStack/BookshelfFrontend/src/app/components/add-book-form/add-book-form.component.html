@@ -1,0 +1,16 @@
+<form (ngSubmit)="add()">
+    <h3>Add a New Book</h3>
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" [(ngModel)]="title" />
+    </div>
+    <div>
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author" [(ngModel)]="author" />
+    </div>
+    <div>
+      <label for="pages"># of pages:</label>
+      <input type="number" name="pages" id="pages" [(ngModel)]="pages" />
+    </div>
+    <button>Add book to my shelf!</button>
+  </form>

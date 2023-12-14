@@ -1,0 +1,35 @@
+<form (ngSubmit)="search()">
+    <h3>Search Books</h3>
+    <label for="query">Query:</label>
+    <input type="text" name="query" id="query" [(ngModel)]="query" />
+    <div>
+      <p>Loan Status:</p>
+      <input
+        type="radio"
+        name="status"
+        id="checked-out"
+        value="true"
+        [(ngModel)]="lentOut"
+      />
+      <label for="checked-out">Lent Out</label>
+      <input
+        type="radio"
+        name="status"
+        id="available"
+        value="false"
+        [(ngModel)]="lentOut"
+      />
+      <label for="available">Available</label>
+      <input
+        type="radio"
+        name="status"
+        id="all"
+        value="null"
+        [(ngModel)]="lentOut"
+        checked
+      />
+      <label for="all">All</label>
+    </div>
+    <button>Search</button>
+    <button type="button" (click)="clear()">Clear Form</button>
+  </form>
