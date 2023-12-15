@@ -15,7 +15,7 @@
     }
   
     <ul>
-        @for (book of books; track $index) {
+        @for (book of books; track book.id) {
             <app-book
             [book]="book"
             (toggleLentOut)="updateLentOut($event)"
