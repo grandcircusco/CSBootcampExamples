@@ -9,13 +9,10 @@
 <div class="library">
     @if (!hasFilters()) {
         <h2>Books:</h2>
-    }
-    @if (hasFilters()) {
+    } @else {
         <h2>Search Results:</h2>
         <button (click)="clearFilters()">Clear Filters</button>
     }
-    
-    
   
     <ul>
         @for (book of books; track $index) {
@@ -25,6 +22,5 @@
             (removeBookFromShelf)="removeBookFromShelf($event)"
           ></app-book>
         }
-      
     </ul>
   </div>

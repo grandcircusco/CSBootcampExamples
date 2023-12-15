@@ -1,0 +1,14 @@
+.library {
+  padding: 30px;
+  margin: 0 30px;
+  background-color: #00072d;
+}
+
+.library h2 {
+  margin: 0;
+  color: white;
+}
+
+.library ul {
+  margin-top: 10px;
+}
