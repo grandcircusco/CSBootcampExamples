@@ -1,0 +1,5 @@
+1. Head into the models folder. Open OrderContext.cs
+2. Update the connection string and save
+3. Run the following command: add-migration UpdateDB
+4. Run the following command: Update-database
+5. Database should be up and running
