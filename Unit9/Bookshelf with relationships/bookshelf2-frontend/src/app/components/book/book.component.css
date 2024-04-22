@@ -1,0 +1,21 @@
+.book {
+    list-style: none;
+    border: 1px solid #00072d;
+    padding: 10px;
+  }
+  
+  .checked-out {
+    background-color: #298ed1;
+  }
+  
+  .available {
+    background-color: #cbdce4;
+  }
+  
+  .lent-out-message {
+    background-color: #00072d;
+    padding: 5px;
+    border-radius: 10px;
+    color: #cbdce4;
+    margin-top: 5px;
+  }

@@ -1,0 +1,13 @@
+.library {
+    padding: 30px;
+    background-color: #00072d;
+  }
+  
+  .library h3 {
+    margin: 0;
+    color: white;
+  }
+  
+  .library ul {
+    margin-top: 10px;
+  }

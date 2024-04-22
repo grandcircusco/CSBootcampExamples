@@ -1,0 +1,35 @@
+<li
+  class="book"
+  [class.checked-out]="book?.lentOut" [class.available]=" !book?.lentOut" 
+>
+  <p>"{{ book?.title }}" by: {{ book?.author }}</p>
+  <p>({{ book?.pages }} pages)</p>
+  @if (book?.lentOut) {
+    <p class="lent-out-message">
+        (Book is currently lent out@if (book?.lentOutTo) {<span> to {{book?.lentOutTo?.displayName}}</span>})
+      </p>
+  }
+@if (showActions && !updating) {
+    <p>
+        <button (click)="toggleLentOut()">
+          {{ !book?.lentOut ? "Lend to a friend" : "Book has been returned" }}
+        </button>
+        <button (click)="remove()">Remove & donate to library</button>
+      </p>
+}
+  @if (updating) {
+    <form (ngSubmit)="saveUpdate()">
+        <label>Who's borrowing it?
+          <select name="lentOutTo" [(ngModel)]="formLentToId">
+            <option value="">Unspecified</option>
+            @for (user of lendableUsers; track user.id) {
+                <option  [value]="user.id">{{user.displayName}}</option>
+            }
+          </select>
+        </label>
+        <button type="submit">Confirm</button>
+        <button type="button" (click)="cancelUpdate()">Cancel</button>
+      </form>
+  }
+  
+</li>

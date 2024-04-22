@@ -1,0 +1,23 @@
+<h2>Bookshelf of {{user.displayName}}</h2>
+<div class="library">
+  <h3>Books they own:</h3>
+  <ul>
+    @for (book of books; track book.id) {
+        <app-book
+      [book]="book"
+    ></app-book>
+    }
+    
+  </ul>
+</div>
+
+<div class="library">
+  <h3>Books they are borrowing:</h3>
+  <ul>
+    @for (book of borrowedBooks; track book.id) {
+        <app-book
+        [book]="book"
+      ></app-book>
+    }
+  </ul>
+</div>
