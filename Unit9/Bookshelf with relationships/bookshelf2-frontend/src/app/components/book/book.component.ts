@@ -52,6 +52,7 @@ export class BookComponent {
     
     const updatedBook: Book = { ...this.book!, lentOut: true, lentOutTo: selectedUser ?? null };
     this.updateBook.emit(updatedBook);
+    this.updating = false;
   }
 
   cancelUpdate = ():void => {

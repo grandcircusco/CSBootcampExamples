@@ -1,0 +1,12 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 30px 20px;
+}
+
+h1 {
+}
+
+a {
+  margin-left: .75em;
+}
