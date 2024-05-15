@@ -21,5 +21,6 @@ public partial class Book
 
     public virtual User? LentOutTo { get; set; }
 
-    public virtual User? Owner { get; set; }
+    // This property was removed. Only the foreign key reference OwnerId is used.
+    // public virtual User? Owner { get; set; }
 }

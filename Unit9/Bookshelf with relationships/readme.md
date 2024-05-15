@@ -6,3 +6,9 @@
    
    `Update-database`
 4. Run the project.
+
+## To run the Angular App
+
+1. `cd` to the `bookshelf2-frontend` folder
+2. Run: `npm install`
+3. Run: `npm start`

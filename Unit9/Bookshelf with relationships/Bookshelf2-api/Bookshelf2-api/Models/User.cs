@@ -11,7 +11,9 @@ public partial class User
 
     public string? DisplayName { get; set; }
 
-    public virtual ICollection<Book> BookLentOutTos { get; set; } = new List<Book>();
+    // This property was removed.
+    // public virtual ICollection<Book> BookLentOutTos { get; set; } = new List<Book>();
 
-    public virtual ICollection<Book> BookOwners { get; set; } = new List<Book>();
+    // This property was removed.
+    // public virtual ICollection<Book> BookOwners { get; set; } = new List<Book>();
 }

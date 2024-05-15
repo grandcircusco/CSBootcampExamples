@@ -1,5 +1,4 @@
 ﻿using Bookshelf2_api.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,38 +13,46 @@ namespace Bookshelf2_api.Controllers
         [HttpGet()]
         public IActionResult GetAll(int? ownerId= null, string? q = null, bool? lentOut = null,  int? lentOutToId= null)
         {
-            List<Book> result = dbContext.Books.Include(b => b.LentOutTo).ToList();
+            // Include ensures that the lentOutTo nested JSON is filled in
+            IQueryable<Book> result = dbContext.Books.Include(b => b.LentOutTo);
             //multiple ifs allow for filtering
             if(ownerId != null)
             {
-                result = result.Where(b => b.OwnerId == ownerId).ToList();
+                result = result.Where(b => b.OwnerId == ownerId);
             }
             if(q != null && q != "")
             {
-                result = result.Where(b => b.Title.ToLower().Contains(q.ToLower())).ToList();
+                result = result.Where(b => b.Title.ToLower().Contains(q.ToLower()));
             }
             if(lentOut != null)
             {
-                result = result.Where(b => b.LentOut == lentOut).ToList();
+                result = result.Where(b => b.LentOut == lentOut);
             }
             if (lentOutToId != null)
             {
-                result = result.Where(b => b.LentOutToId == lentOutToId).ToList();
+                result = result.Where(b => b.LentOutTo.Id == lentOutToId);
             }
-            return Ok(result);
+            return Ok(result.ToList());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Book result = dbContext.Books.Include(b => b.LentOutTo).FirstOrDefault(b => b.Id == id);
+            Book? result = dbContext.Books.Find(id);
             if (result == null) { return NotFound(); }
+            // Ensure that the lentOutTo nested JSON is filled in
+            dbContext.Entry(result).Reference(p => p.LentOutTo).Load();
             return Ok(result);
         }
 
         [HttpPost()]
         public IActionResult AddBook([FromBody]Book b)
         {
+            // We're choosing to trust the object's ID over the LentOutToId in this case.
+            b.LentOutToId = b.LentOutTo?.Id;
+            // Clear out the object so we don't inadvertently overwrite values in the User table.
+            b.LentOutTo = null;
+
             dbContext.Books.Add(b);
             dbContext.SaveChanges();
 
@@ -67,19 +74,10 @@ namespace Bookshelf2_api.Controllers
         {
             if(id != b.Id) { return BadRequest(); }
             if (!dbContext.Books.Any(b => b.Id == id)) { return NotFound(); }
-            if(b.LentOutTo != null)
-            {
-                b.LentOutToId = b.LentOutTo.Id;
-                b.LentOutTo = dbContext.Users.Find(b.LentOutTo.Id);
-                //b.Owner = null;
-            }
-            else
-            {
-                b.LentOutToId = null;
-                b.LentOutTo = null;
-                //b.Owner = null;
-            }
-            b.Owner = dbContext.Users.Find(b.OwnerId);
+            // We're choosing to trust the object's ID over the LentOutToId in this case.
+            b.LentOutToId = b.LentOutTo?.Id;
+            // Clear out the object so we don't inadvertently overwrite values in the User table.
+            b.LentOutTo = null;
             
             dbContext.Books.Update(b);
             dbContext.SaveChanges();
