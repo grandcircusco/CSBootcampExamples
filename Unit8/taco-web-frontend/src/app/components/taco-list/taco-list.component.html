@@ -1,0 +1,22 @@
+<h2>Tacos</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cost</th>
+      <th>Soft Shell</th>
+      <th>Has Chips</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (taco of tacos; track taco.id) {
+    <tr>
+      <td>{{taco.name}}</td>
+      <td>{{taco.cost | currency}}</td>
+      <td>{{taco.softShell ? "Yes" : "-"}}</td>
+      <td>{{taco.chips ? "Yes" : "-"}}</td>
+    </tr>
+    }
+  </tbody>
+</table>

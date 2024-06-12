@@ -1,0 +1,22 @@
+<div class="container">
+  <header>
+    <h1>🌮Welcome to Taco Web🌮</h1>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tacos" routerLinkActive="active" ariaCurrentWhenActive="page">Tacos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/drinks" routerLinkActive="active" ariaCurrentWhenActive="page">Drinks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/combos" routerLinkActive="active" ariaCurrentWhenActive="page">Combos</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
