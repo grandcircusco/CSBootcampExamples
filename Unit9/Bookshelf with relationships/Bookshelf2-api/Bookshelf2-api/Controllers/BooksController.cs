@@ -82,7 +82,7 @@ namespace Bookshelf2_api.Controllers
             dbContext.Books.Update(b);
             dbContext.SaveChanges();
 
-            return NoContent();
+            return Ok(b);
         }
     }
 }
