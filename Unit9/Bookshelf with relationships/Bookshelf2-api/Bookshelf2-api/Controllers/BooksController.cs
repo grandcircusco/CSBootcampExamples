@@ -56,7 +56,7 @@ namespace Bookshelf2_api.Controllers
             dbContext.Books.Add(b);
             dbContext.SaveChanges();
 
-            return CreatedAtAction(nameof(GetById), new { id = b.Id}, b);
+            return Created($"/Books/{b.Id}", b);
         }
 
         [HttpDelete("{id}")]
