@@ -14,4 +14,6 @@ public interface CharacterRepository extends JpaRepository<AvCharacter, Long> {
 	List<AvCharacter> findByFirstMovieId(Long movieId);
 
 	List<AvCharacter> findByHomeWorldId(Long worldId);
+
+	List<AvCharacter> findByHomeWorldName(String worldName);
 }

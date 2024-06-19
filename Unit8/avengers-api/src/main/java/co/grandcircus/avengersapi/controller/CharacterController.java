@@ -32,7 +32,8 @@ public class CharacterController {
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String skill,
 			@RequestParam(required = false) Long firstMovieId,
-			@RequestParam(required = false) Long homeWorldId) {
+			@RequestParam(required = false) Long homeWorldId,
+			@RequestParam(required = false) String homeWorldName) {
 		if (name != null && !name.isBlank()) {
 			return characterRepo.findByNameContainsIgnoringCase(name);
 		} else if (skill != null && !skill.isBlank()) {
@@ -41,6 +42,8 @@ public class CharacterController {
 			return characterRepo.findByFirstMovieId(firstMovieId);
 		} else if (homeWorldId != null) {
 			return characterRepo.findByHomeWorldId(homeWorldId);
+		} else if (homeWorldName != null && !homeWorldName.isBlank()) {
+			return characterRepo.findByHomeWorldName(homeWorldName);
 		} else {
 			return characterRepo.findAll();
 		}
