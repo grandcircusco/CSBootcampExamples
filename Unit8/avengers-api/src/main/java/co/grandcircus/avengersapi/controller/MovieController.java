@@ -22,13 +22,13 @@ import co.grandcircus.avengersapi.model.Movie;
 import co.grandcircus.avengersapi.repository.MovieRepository;
 
 @RestController
-@RequestMapping("movies")
+@RequestMapping("/movies")
 public class MovieController {
 	@Autowired
 	private MovieRepository movieRepo;
 
 	// C(R)UD -- Read All
-	@GetMapping("")
+	@GetMapping
 	public List<Movie> readAll(@RequestParam(required = false) String title,
 			@RequestParam(required = false) Integer releaseYear, @RequestParam(required = false) String sort) {
 		if (title != null && !title.isBlank()) {
@@ -45,14 +45,14 @@ public class MovieController {
 	}
 
 	// C(R)UD -- Read One
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public Movie readOne(@PathVariable("id") Long id) {
 		return movieRepo.findById(id)
 				.orElseThrow(() -> new MovieNotFoundException(id));
 	}
 
 	// (C)RUD -- Create
-	@PostMapping("")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Movie create(@RequestBody Movie movie) {
 		movie.setId(null); // just to be safe... new entries should not have ID already set
@@ -61,14 +61,14 @@ public class MovieController {
 	}
 
 	// CRU(D) -- Delete
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		movieRepo.deleteById(id);
 	}
 
 	// CR(U)D -- Update
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	public Movie update(@PathVariable("id") Long id, @RequestBody Movie movie) {
 		movie.setId(id);
 		return movieRepo.save(movie);

@@ -31,6 +31,7 @@ public class HomeController {
 		Map<String, Object> result = new LinkedHashMap<>();
 		result.put("status", "OK");
 		result.put("collections", new String[] { "/characters", "/movies", "/worlds" });
+		result.put("reset data", "/reset");
 		return result;
 	}	
 	

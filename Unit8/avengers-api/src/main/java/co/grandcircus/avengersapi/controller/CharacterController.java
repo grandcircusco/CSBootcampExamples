@@ -21,13 +21,13 @@ import co.grandcircus.avengersapi.model.AvCharacter;
 import co.grandcircus.avengersapi.repository.CharacterRepository;
 
 @RestController
-@RequestMapping("characters")
+@RequestMapping("/characters")
 public class CharacterController {
 	@Autowired
 	private CharacterRepository characterRepo;
 	
 	// C(R)UD -- Read All
-	@GetMapping("")
+	@GetMapping
 	public List<AvCharacter> readAll(
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String skill,
@@ -50,13 +50,13 @@ public class CharacterController {
 	}
 	
 	// C(R)UD -- Read One
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public AvCharacter readOne(@PathVariable("id") Long id) {
 		return characterRepo.findById(id).orElseThrow(() -> new CharacterNotFoundException(id) );
 	}
 	
 	// (C)RUD -- Create
-	@PostMapping("")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public AvCharacter create(@RequestBody AvCharacter avchar) {
 		avchar.setId(null); // just to be safe... new entries should not have ID already set
@@ -65,14 +65,14 @@ public class CharacterController {
 	}
 	
 	// CRU(D) -- Delete
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		characterRepo.deleteById(id);
 	}
 	
 	// CR(U)D -- Update
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	public AvCharacter update(@PathVariable("id") Long id,
 			@RequestBody AvCharacter avchar) {
 		avchar.setId(id);

@@ -21,13 +21,13 @@ import co.grandcircus.avengersapi.model.World;
 import co.grandcircus.avengersapi.repository.WorldRepository;
 
 @RestController
-@RequestMapping("worlds")
+@RequestMapping("/worlds")
 public class WorldController {
 	@Autowired
 	private WorldRepository worldRepo;
 	
 	// C(R)UD -- Read All
-	@GetMapping("")
+	@GetMapping
 	public List<World> readAll(@RequestParam(required=false) String skill) {
 		if (skill != null) {
 			return worldRepo.findAll();
@@ -37,13 +37,13 @@ public class WorldController {
 	}
 	
 	// C(R)UD -- Read One
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public World readOne(@PathVariable("id") Long id) {
 		return worldRepo.findById(id).orElseThrow(() -> new WorldNotFoundException(id) );
 	}
 	
 	// (C)RUD -- Create
-	@PostMapping("")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public World create(@RequestBody World world) {
 		world.setId(null); // just to be safe... new entries should not have ID already set
@@ -52,14 +52,14 @@ public class WorldController {
 	}
 	
 	// CRU(D) -- Delete
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		worldRepo.deleteById(id);
 	}
 	
 	// CR(U)D -- Update
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	public World update(@PathVariable("id") Long id,
 			@RequestBody World world) {
 		world.setId(id);
